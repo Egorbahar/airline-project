@@ -1,0 +1,14 @@
+logging:
+  file:
+    name: logs/application-debug.log
+  pattern:
+    file: "%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n"
+    console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n"
+  level:
+    root: info
+    com.godeltech: debug
+    org.hibernate: debug
+  logback:
+    rollingpolicy:
+      file-name-pattern: logs/archived/application-debug-%d{yyyy-MM-dd}.%i.log
+      max-file-size: 10MB
