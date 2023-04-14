@@ -1,0 +1,145 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-04-14--01-employee-create-table
+      author: godeltech
+      changes:
+        - createTable:
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: employee_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2023-04-14--02-flight-crew-create-table
+      author: godeltech
+      changes:
+        - createTable:
+            tableName: flight_crew
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: flight_crew_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: employee_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_employee_id
+                    references: employee(id)
+
+  - changeSet:
+      id: 2023-04-14--03-category-create-table
+      author: godeltech
+      changes:
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: category_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2023-04-14--04-aircraft-create-table
+      author: godeltech
+      changes:
+        - createTable:
+            tableName: aircraft
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: airplane_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_category_id
+                    references: category(id)
+  - changeSet:
+      id: 2023-04-14--05-flight-create-table
+      author: godeltech
+      changes:
+        - createTable:
+            tableName: flight
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: flight_id
+                    nullable: false
+              - column:
+                  name: aircraft_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_aircraft_id
+                    references: aircraft(id)
+              - column:
+                  name: flight_crew_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_flight_crew_id
+                    references: flight_crew(id)
+              - column:
+                  name: departure_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: arrival_date
+                  type: date
+                  constraints:
+                    nullable: false
