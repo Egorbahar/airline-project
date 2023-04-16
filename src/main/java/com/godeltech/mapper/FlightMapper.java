@@ -2,12 +2,14 @@ package com.godeltech.mapper;
 
 import com.godeltech.persistence.model.Aircraft;
 import com.godeltech.persistence.model.Flight;
+import com.godeltech.persistence.model.FlightCrew;
 import com.godeltech.web.dto.request.FlightRequestDto;
 import com.godeltech.web.dto.response.FlightResponseDto;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,11 +29,16 @@ public interface FlightMapper {
     @Mapping(target = "arrivalDate", source = "arrivalDate")
     Flight toFlight(FlightRequestDto flightRequestDto);
 
-//    default void updateEntity(final Flight flight,
-//                              final Aircraft aircraft) {
-//        flight.setAircraft(aircraft);
-//        flight.setCaptain(captain);
-//    }
+    default void updateEntity(final Flight flight,
+                              final Aircraft aircraft,
+                              final FlightRequestDto flightRequestDto,
+                              final FlightCrew flightCrew) {
+        flight.setAircraft(aircraft);
+        flight.setDepartureDate(LocalDate.parse(flightRequestDto.getDepartureDate()));
+        flight.setArrivalDate(LocalDate.parse(flightRequestDto.getArrivalDate()));
+        flight.setFlightCrew(flightCrew);
+
+    }
     @IterableMapping(elementTargetType = FlightResponseDto.class)
     List<FlightResponseDto> toFlightResponseDtoList(Collection<Flight> flights);
 }
