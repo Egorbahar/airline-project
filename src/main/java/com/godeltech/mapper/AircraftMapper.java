@@ -21,7 +21,6 @@ public interface AircraftMapper {
     AircraftResponseDto toAircraftResponseDto(Aircraft aircraft);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "windSpeed" , source = "windSpeed")
     Aircraft toAircraft(AircraftRequestDto aircraftRequestDto);
 
     default void updateEntity(Aircraft aircraft, AircraftRequestDto aircraftRequestDto, Category category) {

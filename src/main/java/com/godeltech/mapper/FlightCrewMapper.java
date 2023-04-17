@@ -12,7 +12,7 @@ import java.util.List;
 public interface FlightCrewMapper {
     FlightCrewResponseDto toFlightCrewResponseDto(FlightCrew flightCrew);
 
-    @Mapping(target = "id", ignore = true)
+
     FlightCrew toFlightCrew(FlightCrewRequestDto flightCrewRequestDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
