@@ -2,13 +2,8 @@ package com.godeltech.service;
 
 import com.godeltech.persistence.model.Employee;
 import com.godeltech.persistence.model.FlightCrew;
-import com.godeltech.persistence.model.Category;
-import com.godeltech.persistence.model.FlightCrew;
-import com.godeltech.persistence.reposirtory.FlightCrewRepository;
 import com.godeltech.persistence.reposirtory.FlightCrewRepository;
 import com.godeltech.service.impl.FlightCrewServiceImpl;
-import com.godeltech.service.impl.FlightCrewServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,8 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 public class FlightCrewServiceImplTest {
@@ -48,7 +43,7 @@ public class FlightCrewServiceImplTest {
 
         verify(flightCrewRepository, times(1)).findById(ID);
 
-        Assertions.assertEquals(expectedFlightCrew, actualAirPlane);
+        assertEquals(expectedFlightCrew, actualAirPlane);
     }
 
     @Test
@@ -59,7 +54,7 @@ public class FlightCrewServiceImplTest {
 
         verify(flightCrewRepository, times(1)).findAll();
 
-        Assertions.assertEquals(expectedFlightCrewList, actualAirPlaneList);
+        assertEquals(expectedFlightCrewList, actualAirPlaneList);
     }
 
     @Test
@@ -70,7 +65,7 @@ public class FlightCrewServiceImplTest {
 
         verify(flightCrewRepository, times(1)).save(expectedFlightCrew);
 
-        Assertions.assertEquals(expectedFlightCrew, actualFlightCrew);
+        assertEquals(expectedFlightCrew, actualFlightCrew);
     }
 
     @Test
@@ -93,6 +88,6 @@ public class FlightCrewServiceImplTest {
 
         verify(flightCrewRepository, times(1)).saveAndFlush(expectedFlightCrew);
 
-        Assertions.assertEquals(expectedFlightCrew, actualFlightCrew);
+        assertEquals(expectedFlightCrew, actualFlightCrew);
     }
 }

@@ -4,7 +4,6 @@ import com.godeltech.persistence.model.Aircraft;
 import com.godeltech.persistence.model.Category;
 import com.godeltech.persistence.reposirtory.AircraftRepository;
 import com.godeltech.service.impl.AircraftServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,7 +44,7 @@ class AircraftServiceImplTest {
 
         verify(aircraftRepository, times(1)).findById(ID);
 
-        Assertions.assertEquals(expectedAircraft, actualAirPlane);
+        assertEquals(expectedAircraft, actualAirPlane);
     }
 
     @Test
@@ -55,7 +55,7 @@ class AircraftServiceImplTest {
 
         verify(aircraftRepository, times(1)).findAll();
 
-        Assertions.assertEquals(expectedAircraftList, actualAirPlaneList);
+        assertEquals(expectedAircraftList, actualAirPlaneList);
     }
 
     @Test
@@ -66,7 +66,7 @@ class AircraftServiceImplTest {
 
         verify(aircraftRepository, times(1)).save(expectedAircraft);
 
-        Assertions.assertEquals(expectedAircraft, actualAircraft);
+        assertEquals(expectedAircraft, actualAircraft);
     }
 
     @Test
@@ -89,6 +89,6 @@ class AircraftServiceImplTest {
 
         verify(aircraftRepository, times(1)).saveAndFlush(expectedAircraft);
 
-        Assertions.assertEquals(expectedAircraft, actualAircraft);
+        assertEquals(expectedAircraft, actualAircraft);
     }
 }

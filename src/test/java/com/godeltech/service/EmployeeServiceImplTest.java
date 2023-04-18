@@ -1,14 +1,9 @@
 package com.godeltech.service;
 
 import com.godeltech.persistence.model.Employee;
-import com.godeltech.persistence.model.Category;
-import com.godeltech.persistence.model.Employee;
 import com.godeltech.persistence.model.FlightCrew;
 import com.godeltech.persistence.reposirtory.EmployeeRepository;
-import com.godeltech.persistence.reposirtory.EmployeeRepository;
 import com.godeltech.service.impl.EmployeeServiceImpl;
-import com.godeltech.service.impl.EmployeeServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceImplTest {
@@ -49,7 +44,7 @@ public class EmployeeServiceImplTest {
 
         verify(employeeRepository, times(1)).findById(ID);
 
-        Assertions.assertEquals(expectedEmployee, actualAirPlane);
+        assertEquals(expectedEmployee, actualAirPlane);
     }
 
     @Test
@@ -60,7 +55,7 @@ public class EmployeeServiceImplTest {
 
         verify(employeeRepository, times(1)).findAll();
 
-        Assertions.assertEquals(expectedEmployeeList, actualAirPlaneList);
+        assertEquals(expectedEmployeeList, actualAirPlaneList);
     }
 
     @Test
@@ -71,7 +66,7 @@ public class EmployeeServiceImplTest {
 
         verify(employeeRepository, times(1)).save(expectedEmployee);
 
-        Assertions.assertEquals(expectedEmployee, actualEmployee);
+        assertEquals(expectedEmployee, actualEmployee);
     }
 
     @Test
@@ -94,6 +89,6 @@ public class EmployeeServiceImplTest {
 
         verify(employeeRepository, times(1)).saveAndFlush(expectedEmployee);
 
-        Assertions.assertEquals(expectedEmployee, actualEmployee);
+        assertEquals(expectedEmployee, actualEmployee);
     }
 }
