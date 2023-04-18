@@ -8,7 +8,6 @@ import com.godeltech.service.EmployeeService;
 import com.godeltech.service.FlightCrewService;
 import com.godeltech.web.dto.request.EmployeeRequestDto;
 import com.godeltech.web.dto.response.EmployeeResponseDto;
-import liquibase.pro.packaged.E;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -46,7 +45,9 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<EmployeeResponseDto> save(@Valid @RequestBody EmployeeRequestDto employeeRequestDto) {
         log.info("Save new employee");
-        return new ResponseEntity<>((employeeMapper.toEmployeeResponseDto(employeeService.save(employeeMapper.toEmployee(employeeRequestDto)))), HttpStatus.OK);
+        final Employee employee = employeeMapper.toEmployee(employeeRequestDto);
+        employee.setFlightCrew(flightCrewService.findById(employeeRequestDto.getFlightCrewId()));
+        return new ResponseEntity<>(employeeMapper.toEmployeeResponseDto(employeeService.save(employee)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

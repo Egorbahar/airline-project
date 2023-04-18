@@ -1,8 +1,12 @@
 package com.godeltech.service.impl;
 
 import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.AbsenceAircraftException;
 import com.godeltech.exception.ResourceNotFoundException;
+import com.godeltech.exception.UnderstaffedFlightException;
+import com.godeltech.persistence.model.Aircraft;
 import com.godeltech.persistence.model.Flight;
+import com.godeltech.persistence.model.FlightCrew;
 import com.godeltech.persistence.reposirtory.FlightRepository;
 import com.godeltech.service.FlightService;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +27,15 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public Flight findById(final Long id) {
         log.debug("Find flight with id:{}", id);
-        return flightRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(localMessageSource.getMessage("error.record.notExist", new Object[]{})));
+        return flightRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(localMessageSource.getMessage("error.record.notExist", new Object[]{})));
     }
 
     @Override
     @Transactional
     public Flight save(final Flight flight) {
         log.debug("Save flight");
+        checkAllConditionsForFlightSaving(flight);
         return flightRepository.save(flight);
     }
 
@@ -53,5 +59,30 @@ public class FlightServiceImpl implements FlightService {
         log.debug("Delete flight with id:{}", id);
         findById(id);
         flightRepository.deleteById(id);
+    }
+
+    private boolean checkAbsenceOfAircraft(Flight flight) {
+        return findAll().stream()
+                .map(Flight::getAircraft)
+                .map(Aircraft::getId)
+                .toList()
+                .contains(flight.getAircraft().getId());
+    }
+
+    private boolean checkAbsenceOfFlightCrew(Flight flight) {
+        return findAll().stream()
+                .map(Flight::getFlightCrew)
+                .map(FlightCrew::getId)
+                .toList()
+                .contains(flight.getFlightCrew().getId());
+    }
+
+    private void checkAllConditionsForFlightSaving(Flight flight) {
+        if (checkAbsenceOfAircraft(flight)) {
+            throw new AbsenceAircraftException(localMessageSource.getMessage("error.flight.absenceOfAircraft", new Object[]{}));
+        }
+        if (checkAbsenceOfFlightCrew(flight)) {
+            throw new UnderstaffedFlightException(localMessageSource.getMessage("error.flight.underStaffedFlight", new Object[]{}));
+        }
     }
 }

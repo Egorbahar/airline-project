@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
-import java.util.stream.Collectors;
 @Validated
 @RestController
 @RequestMapping("/aircraft")
@@ -48,7 +47,9 @@ public class AircraftController {
     @PostMapping
     public ResponseEntity<AircraftResponseDto> save(@Validated @RequestBody AircraftRequestDto aircraftRequestDto) {
         log.info("Save new aircraft");
-        return new ResponseEntity<>(aircraftMapper.toAircraftResponseDto(aircraftService.save(aircraftMapper.toAircraft(aircraftRequestDto))), HttpStatus.OK);
+        final Aircraft aircraft = aircraftMapper.toAircraft(aircraftRequestDto);
+        aircraft.setCategory(categoryService.findById(aircraftRequestDto.getCategoryId()));
+        return new ResponseEntity<>(aircraftMapper.toAircraftResponseDto(aircraftService.save(aircraft)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
