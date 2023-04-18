@@ -1,6 +1,7 @@
 package com.godeltech.web.handler;
 
 import com.godeltech.exception.AbsenceAircraftException;
+import com.godeltech.exception.DateTimeMismatchException;
 import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.exception.UnderstaffedFlightException;
 import com.godeltech.web.dto.response.ErrorResponseDto;
@@ -47,6 +48,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
     @ExceptionHandler(value = AbsenceAircraftException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(AbsenceAircraftException exception, WebRequest request) {
+        final ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        log.error(exception.getMessage());
+        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
+    }
+    @ExceptionHandler(value = DateTimeMismatchException.class)
+    public ResponseEntity<Object> handleResourceNotFoundException(DateTimeMismatchException exception, WebRequest request) {
         final ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         log.error(exception.getMessage());
         return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);

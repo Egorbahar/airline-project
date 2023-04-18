@@ -63,7 +63,7 @@ public class FlightServiceImpl implements FlightService {
 
     private boolean checkAbsenceOfAircraft(Flight flight) {
         return findAll().stream()
-                .filter(f -> f.getArrivalDate().isBefore(flight.getDepartureDate()) || f.getArrivalDate().isEqual(flight.getDepartureDate()))
+                .filter(f -> f.getArrivalDate().isAfter(flight.getDepartureDate()) || f.getArrivalDate().isEqual(flight.getDepartureDate()))
                 .map(f -> f.getAircraft().getId())
                 .toList()
                 .contains(flight.getAircraft().getId());
@@ -71,7 +71,7 @@ public class FlightServiceImpl implements FlightService {
 
     private boolean checkAbsenceOfFlightCrew(Flight flight) {
         return findAll().stream()
-                .filter(f -> f.getArrivalDate().isBefore(flight.getDepartureDate()) || f.getArrivalDate().isEqual(flight.getDepartureDate()))
+                .filter(f -> f.getArrivalDate().isAfter(flight.getDepartureDate()) || f.getArrivalDate().isEqual(flight.getDepartureDate()))
                 .map(f -> f.getFlightCrew().getId())
                 .toList()
                 .contains(flight.getFlightCrew().getId());

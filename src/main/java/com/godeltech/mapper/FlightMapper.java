@@ -1,5 +1,6 @@
 package com.godeltech.mapper;
 
+import com.godeltech.exception.DateTimeMismatchException;
 import com.godeltech.persistence.model.Aircraft;
 import com.godeltech.persistence.model.Flight;
 import com.godeltech.persistence.model.FlightCrew;
@@ -9,7 +10,6 @@ import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
@@ -24,14 +24,17 @@ public interface FlightMapper {
     @Mapping(target = "flightCrewId", source = "flightCrew.id")
     FlightResponseDto toFlightResponseDto(Flight flight);
 
-    default Flight toFlight(FlightRequestDto flightRequestDto)
-    {
-
-       return Flight.builder()
+    default Flight toFlight(FlightRequestDto flightRequestDto) {
+        LocalDateTime departureDateTime = LocalDateTime.parse(flightRequestDto.getDepartureDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        LocalDateTime arrivalDateTime = LocalDateTime.parse(flightRequestDto.getArrivalDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        if (arrivalDateTime.isEqual(departureDateTime) || arrivalDateTime.isBefore(departureDateTime)) {
+            throw new DateTimeMismatchException("Dates entered incorrectly!");
+        }
+        return Flight.builder()
                 .aircraft(Aircraft.builder().id(flightRequestDto.getAircraftId()).build())
                 .flightCrew(FlightCrew.builder().id(flightRequestDto.getFlightCrewId()).build())
-                .arrivalDate(LocalDateTime.parse(flightRequestDto.getArrivalDate(),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
-                .departureDate(LocalDateTime.parse(flightRequestDto.getDepartureDate(),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+                .arrivalDate(arrivalDateTime)
+                .departureDate(departureDateTime)
                 .build();
     }
 
@@ -45,6 +48,7 @@ public interface FlightMapper {
         flight.setFlightCrew(flightCrew);
 
     }
+
     @IterableMapping(elementTargetType = FlightResponseDto.class)
     List<FlightResponseDto> toFlightResponseDtoList(Collection<Flight> flights);
 }
