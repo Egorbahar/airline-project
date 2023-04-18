@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "flight")
@@ -24,7 +25,7 @@ public class Flight {
     @JoinColumn(name = "flight_crew_id", nullable = false)
     private FlightCrew flightCrew;
     @Column(name = "departure_date")
-    private LocalDate departureDate;
+    private LocalDateTime departureDate;
     @Column(name = "arrival_date")
-    private LocalDate arrivalDate;
+    private LocalDateTime arrivalDate;
 }

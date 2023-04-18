@@ -135,11 +135,11 @@ databaseChangeLog:
                     references: flight_crew(id)
               - column:
                   name: departure_date
-                  type: date
+                  type: timestamp without time zone
                   constraints:
                     nullable: false
               - column:
                   name: arrival_date
-                  type: date
+                  type: timestamp without time zone
                   constraints:
                     nullable: false

@@ -3,9 +3,7 @@ package com.godeltech.web.controller;
 import com.godeltech.component.LocalMessageSource;
 import com.godeltech.exception.AssignmentException;
 import com.godeltech.mapper.FlightCrewMapper;
-import com.godeltech.persistence.model.Category;
 import com.godeltech.persistence.model.FlightCrew;
-import com.godeltech.service.CategoryService;
 import com.godeltech.service.FlightCrewService;
 import com.godeltech.service.FlightService;
 import com.godeltech.web.dto.request.FlightCrewRequestDto;
@@ -28,7 +26,6 @@ import java.util.List;
 @Slf4j
 public class FlightCrewController {
     private final FlightCrewService flightCrewService;
-    private final CategoryService categoryService;
     private final FlightCrewMapper flightCrewMapper;
     private final FlightService flightService;
     private final LocalMessageSource localMessageSource;
