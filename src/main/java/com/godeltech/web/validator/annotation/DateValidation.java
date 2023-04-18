@@ -1,4 +1,6 @@
-package com.godeltech.web.validator;
+package com.godeltech.web.validator.annotation;
+
+import com.godeltech.web.validator.DateValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

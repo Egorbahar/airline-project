@@ -1,7 +1,7 @@
 package com.godeltech.web.validator;
 
-import com.godeltech.component.LocalMessageSource;
 import com.godeltech.exception.DateTimeMismatchException;
+import com.godeltech.web.validator.annotation.DateValidation;
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.ConstraintValidator;
@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 
 public class DateValidator implements ConstraintValidator<DateValidation, String> {
-    private final LocalMessageSource localMessageSource;
     @Override
     public boolean isValid(String customDateField,
                            ConstraintValidatorContext cxt) {
@@ -23,7 +22,7 @@ public class DateValidator implements ConstraintValidator<DateValidation, String
         }
         catch (Exception e)
         {
-            throw new DateTimeMismatchException(localMessageSource.getMessage("flight.format", new Object[]{}));
+            throw new DateTimeMismatchException("Invalid date format!");
         }
     }
 }
