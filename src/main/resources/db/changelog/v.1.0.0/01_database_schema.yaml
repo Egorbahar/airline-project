@@ -1,6 +1,26 @@
 databaseChangeLog:
   - changeSet:
-      id: 2023-04-14--01-employee-create-table
+      id: 2023-04-14--01-flight-crew-create-table
+      author: godeltech
+      changes:
+        - createTable:
+            tableName: flight_crew
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: flight_crew_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2023-04-14--02-employee-create-table
       author: godeltech
       changes:
         - createTable:
@@ -29,33 +49,13 @@ databaseChangeLog:
                   type: varchar(50)
                   constraints:
                     nullable: false
-  - changeSet:
-      id: 2023-04-14--02-flight-crew-create-table
-      author: godeltech
-      changes:
-        - createTable:
-            tableName: flight_crew
-            columns:
               - column:
-                  name: id
-                  type: bigint
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    primaryKeyName: flight_crew_id
-                    nullable: false
-              - column:
-                  name: name
-                  type: varchar(20)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: employee_id
+                  name: flight_crew_id
                   type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_employee_id
-                    references: employee(id)
+                    foreignKeyName: fk_flight_crew_id
+                    references: flight_crew(id)
 
   - changeSet:
       id: 2023-04-14--03-category-create-table

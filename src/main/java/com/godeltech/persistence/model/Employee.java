@@ -23,6 +23,6 @@ public class Employee {
     @Column(name = "title", nullable = false, length = 50)
     private String title;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "flight_crew_id", nullable = false)
     private FlightCrew flightCrew;
 }

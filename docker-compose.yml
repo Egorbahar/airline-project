@@ -9,7 +9,7 @@ services:
     volumes:
       - ./infrastructure/db:/docker-entrypoint-initdb.d
     restart: unless-stopped
-  app-airline:
+  service-airline:
     build:
       context: .
       dockerfile: Dockerfile
@@ -19,4 +19,5 @@ services:
     ports:
       - 8080:8080
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://service-db/airline-service
+      SPRING_DATASOURCE_URL: jdbc:postgresql://service-db/airline
+      SPRING_PROFILES_ACTIVE: dev

@@ -10,6 +10,10 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface EmployeeMapper {
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "surname", source = "surname")
+    @Mapping(target = "flightCrewId", source = "flightCrew.id")
     EmployeeResponseDto toEmployeeResponseDto(Employee employee);
 
     @Mapping(target = "id", ignore = true)

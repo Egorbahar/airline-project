@@ -1,14 +1,11 @@
 package com.godeltech.web.controller;
 
-import com.godeltech.component.LocalMessageSource;
-import com.godeltech.exception.AssignmentException;
 import com.godeltech.mapper.FlightMapper;
 import com.godeltech.persistence.model.Aircraft;
 import com.godeltech.persistence.model.Flight;
 import com.godeltech.persistence.model.FlightCrew;
 import com.godeltech.service.AircraftService;
 import com.godeltech.service.FlightCrewService;
-import com.godeltech.service.FlightService;
 import com.godeltech.service.FlightService;
 import com.godeltech.web.dto.request.FlightRequestDto;
 import com.godeltech.web.dto.response.FlightResponseDto;
