@@ -17,7 +17,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 @Documented
 @Constraint(validatedBy = DateValidator.class)
 public @interface DateValidation {
-    public String message() default "Invalid color: must be RED, GREEN or BLUE";
-    public Class<?>[] groups() default {};
-    public Class<? extends Payload>[] payload() default {};
+    String message();
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
 }
