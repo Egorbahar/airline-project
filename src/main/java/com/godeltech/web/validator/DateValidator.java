@@ -9,7 +9,6 @@ import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
-
 public class DateValidator implements ConstraintValidator<DateValidation, String> {
     @Override
     public boolean isValid(String customDateField,
@@ -17,7 +16,7 @@ public class DateValidator implements ConstraintValidator<DateValidation, String
         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try
         {
-            LocalDateTime localDateTime = LocalDateTime.parse(customDateField,DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            LocalDateTime.parse(customDateField,DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             return true;
         }
         catch (Exception e)
