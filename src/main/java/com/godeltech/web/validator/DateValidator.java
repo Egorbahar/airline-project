@@ -1,13 +1,11 @@
 package com.godeltech.web.validator;
 
 import com.godeltech.exception.DateTimeMismatchException;
-import com.godeltech.web.dto.request.FlightRequestDto;
 import com.godeltech.web.validator.annotation.DateValidation;
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
