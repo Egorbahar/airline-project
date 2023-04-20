@@ -76,6 +76,7 @@ databaseChangeLog:
                   name: name
                   type: varchar(50)
                   constraints:
+                    unique: true
                     nullable: false
   - changeSet:
       id: 2023-04-14--04-aircraft-create-table
