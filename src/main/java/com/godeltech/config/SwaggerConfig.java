@@ -18,7 +18,6 @@ public class SwaggerConfig {
                                 .version("1.0.0")
                                 .contact(
                                         new Contact()
-                                                .email("y.bakhar@godeltech.com")
                                                 .name("Bakhar Yahor")
                                 )
                 );
