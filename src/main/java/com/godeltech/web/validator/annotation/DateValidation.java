@@ -17,7 +17,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 @Documented
 @Constraint(validatedBy = DateValidator.class)
 public @interface DateValidation {
-    String message();
+    String message() default "Error";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
