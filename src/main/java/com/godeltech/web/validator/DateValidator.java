@@ -13,8 +13,7 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 public class DateValidator implements ConstraintValidator<DateValidation, String> {
     @Override
-    public boolean isValid(String customDateField,
-                           ConstraintValidatorContext cxt) {
+    public boolean isValid(String customDateField, ConstraintValidatorContext cxt) {
         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try
         {
